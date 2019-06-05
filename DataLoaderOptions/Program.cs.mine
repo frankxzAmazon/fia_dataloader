@@ -1,0 +1,146 @@
+﻿using DataLoaderOptions.Loaders;
+using DataLoaderOptions.MicrosoftExchange;
+using Extensions;
+using System;
+using System.IO;
+using System.Linq;
+
+namespace DataLoaderOptions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //var str = Directory.GetCurrentDirectory();
+            //var dlicPath = @"W:\DACT\ALM\FIAHedging\DBUpload\DLIC NB FIA\";
+            //SharepointSite sharepoint = new SharepointSite()
+            //{
+            //    Url = @"https://delawarelife.sharepoint.com/sites/Delaware.Reports/",
+            //    DownloadPath = dlicPath + @"ToUpload\",
+            //    SharePointFolderName = "Documents",
+            //    CheckFile = ((string x) => x.CaseInsensitiveContains("rpt_fia_invstmnt")
+            //                               && !File.Exists(Path.Combine(dlicPath, x)))
+            //};
+            //sharepoint.DownloadFiles();
+            bool toLoad = false;
+            args = new string[] { "citiglac" };
+            foreach (var arg in args)
+            {
+                IDataLoader loader;
+                switch (arg.ToLowerInvariant())
+                {
+                    case "/loadOn":
+                        loader = null;
+                        toLoad = true;
+                        break;
+                    case "/loadOff":
+                        loader = null;
+                        toLoad = false;
+                        break;
+                    case "dlicnbfia":
+                        loader = new DataLoaderDLICNbFIA();
+                        break;
+                    //case "dlicasset":
+                    //    DataLoaderDLICAsset dlicAsset = new DataLoaderDLICAsset();
+                    //    dlicAsset.LoadToSql();
+                    //    break;
+                    case "bc":
+                        loader = new DataLoaderBarclays();
+                        break;
+                    case "baml":
+                        loader = new DataLoaderBAML();
+                        break;
+                    case "bnp":
+                        loader = new DataLoaderBNP();
+                        break; ;
+                    case "cs":
+                        loader = new DataLoaderCS();
+                        break;
+                    case "jp":
+                        loader = new DataLoaderJP();
+                        break;
+                    case "citi":
+                        loader = new DataLoaderCiti();
+                        break;
+                    case "citiglac":
+                        loader = new DataLoaderCitiGlac();
+                        break;
+                    case "db":
+                        loader = new DataLoaderDB();
+                        break;
+                    case "gs":
+                        loader = new DataLoaderGS();
+                        break;
+                    case "ms":
+                        loader = new DataLoaderMS();
+                        break;
+                    case "wf":
+                        loader = new DataLoaderWF();
+                        break;
+                    case "keyport":
+                        loader = new DataLoaderKeyPort();
+                        break;
+                    case "sundex":
+                        loader = new DataLoaderSundex();
+                        break;
+                    case "elic":
+                        loader = new DataLoaderELIC();
+                        break;
+                    case "sntl":
+                        loader = new DataLoaderSNTL();
+                        break;
+                    case "glac":
+                        loader = new DataLoaderGLAC();
+                        break;
+                    case "gisassets":
+                        loader = new DataLoaderGISAssets();
+                        break;
+                    case "nac":
+                        loader = new DataLoaderNAC();
+                        break;
+                    case "iap":
+                        loader = new DataLoaderIAP();
+                        break;
+                    case "vol":
+                        loader = new DataLoaderBloombergVol();
+                        break;
+                    case "div":
+                        loader = new DataLoaderBloombergDiv();
+                        break;
+                    case "rates":
+                        loader = new DataLoaderBloombergIndex();
+                        loader.ToLoad = toLoad;
+                        loader.LoadToSql();
+                        loader = new DataLoaderBloombergRates();
+                        break;
+                    case "treasury":
+                        loader = new DataLoaderBloombergTreasury();
+                        break;
+                    case "aladdin":
+                        loader = new DataLoaderAladdin();
+                        break;
+                    case "dlicratesetting":
+                        loader = new DataLoaderDLICRateSetting();
+                        break;
+                    case "/pause":
+                        loader = null;
+                        break;
+                    default:
+                        //RunAll();
+                        loader = null;
+                        break;
+                }
+                if (loader != null)
+                {
+                    loader.ToLoad = toLoad;
+                    loader.LoadToSql();
+                }
+            }
+            if (args.Any(a => a == "/pause"))
+            {
+                Console.Write("Waiting for key press to exit...");
+                Console.ReadKey();
+            }
+        }
+    }
+}
