@@ -167,7 +167,11 @@ namespace DataLoaderOptions
         {
             foreach (DataRow row in outputData.Rows)
             {
-                if ((decimal)row["Coupon Rate"] > 100)
+                if (row["Coupon Rate"] == DBNull.Value)
+                {
+                    row["Coupon Rate"] = 0;
+                }
+                else if ((decimal)row["Coupon Rate"] > 100)
                 {
                     row["Coupon Rate"] = (decimal)row["Coupon Rate"] / 100;
                 }
