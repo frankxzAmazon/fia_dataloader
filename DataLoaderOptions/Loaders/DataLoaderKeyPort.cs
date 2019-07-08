@@ -57,6 +57,13 @@ namespace DataLoaderOptions
                     cmd.ExecuteNonQuery();
                 }
 
+                using (SqlCommand cmd = new SqlCommand("delete from OptionInventoryStagingTable", con))
+                {
+                    //   cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 0;
+                    cmd.ExecuteNonQuery();
+                }
+
                 Int32 count;
                 using (SqlCommand sqlCommand = new SqlCommand("select count(*) from " + sqlTable + " where LMPDate like '" + asOfDate.ToShortDateString() + "'", con))
                 {

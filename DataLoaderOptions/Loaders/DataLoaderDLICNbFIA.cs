@@ -103,6 +103,13 @@ namespace DataLoaderOptions
                                 cmd.ExecuteNonQuery();
                             }
 
+                            using (SqlCommand cmd = new SqlCommand("delete from OptionInventoryStagingTable", con))
+                            {
+                                //cmd.CommandType = CommandType.Text;
+                                cmd.CommandTimeout = 0;
+                                cmd.ExecuteNonQuery();
+                            }
+
                             using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
                             {
                                 //Set the database table name
