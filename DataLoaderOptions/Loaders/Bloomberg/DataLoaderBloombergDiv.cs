@@ -58,7 +58,22 @@ namespace DataLoaderOptions
                     FillDataTable(outputData, GetConnString(file, true));
                     DateTime asOfDate = (DateTime)outputData.Rows[0]["FutureDate"];
                     // string fileName = OutputPath + asOfDate.ToString("yyyyMMdd") + "_" + Path.GetFileName(file);
-                    string fileName = OutputPath  + Path.GetFileName(file);
+                    int hour = Int32.Parse(file.Substring(file.IndexOf("_") + 1, 2));
+                    string fileNewName;
+                    if (hour <= 10)
+                    {
+                        fileNewName = $"{Path.GetFileName(file).Substring(0, 19)}Morning.txt";
+                    }
+                    else if (hour <= 15)
+                    {
+                        fileNewName = $"{Path.GetFileName(file).Substring(0, 19)}Noon.txt";
+                    }
+                    else
+                    {
+                        fileNewName = $"{Path.GetFileName(file).Substring(0, 19)}Afternoon.txt";
+                    }
+                    string fileName = OutputPath + fileNewName;
+                   // string fileName = OutputPath  + Path.GetFileName(file);
                     //int changeLogId = base.CreateChangeLog(fileName, Path.GetFileNameWithoutExtension(file), "VolSurface", DateTime.Now);
                     CorrectDataTable(outputData, fileName);
 
