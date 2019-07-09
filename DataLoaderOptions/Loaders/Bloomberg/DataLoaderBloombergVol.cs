@@ -43,7 +43,7 @@ namespace DataLoaderOptions
 
                         DateTime asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "yyyyMMdd") ?? throw new Exception();
                         FillDataTable(outputData, GetConnString(file, true), asOfDate);
-                        string fileName = OutputPath + Path.GetFileName(file);
+                        string fileName = $"{OutputPath}{asOfDate.ToString("yyyyMMdd")}BVOL_After5pm.txt";
                         if (!File.Exists(fileName))
                         {
                             //int changeLogId = base.CreateChangeLog(fileName, Path.GetFileNameWithoutExtension(file), "VolSurface", DateTime.Now);
