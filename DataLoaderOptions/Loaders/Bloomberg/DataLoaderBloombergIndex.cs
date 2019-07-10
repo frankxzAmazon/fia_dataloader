@@ -33,6 +33,10 @@ namespace DataLoaderOptions
             ["SPMARC5P Index"] = "SPMARC5P",
             ["SPX Index"] = "SPX",
             ["SX5E Index"] = "SX5E",
+            ["TPX Index"]= "TPX",
+            ["HSI Index"]="HSI",
+            ["UKX Index"]= "UKX",
+            ["LBUSTRUU Index"]= "LBUSTRUU",
 
         };
         Dictionary<string, string> tickerDesc = new Dictionary<string, string>()
@@ -53,7 +57,10 @@ namespace DataLoaderOptions
             ["SPMARC5P"] = "S&P Marc 5",
             ["SPX"] = "S&P 500",
             ["SX5E"] = "EURO STOXX",
-
+            ["TPX"]= "TPX",
+            ["HSI"]="HSI",
+            ["UKX"]= "UKX",
+            ["LBUSTRUU"]= "LBUSTRUU",
         };
         string inputFolder;
         static object toLock = new object();
