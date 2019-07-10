@@ -54,6 +54,7 @@ namespace DataLoaderOptions
                             string sqlString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
                             using (SqlConnection con = new SqlConnection(sqlString))
                             {
+                                con.Open();
                                 try
                                 {
                                     using (SqlCommand cmd = new SqlCommand("GIS.InsertNAC", con))

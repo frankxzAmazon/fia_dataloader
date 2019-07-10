@@ -202,7 +202,7 @@
     </Compile>
     <Compile Include="Readers\DataReader_Excel.cs" />
     <Compile Include="Loaders\DataLoaderIAP.cs" />
-    <Compile Include="obj\DataLoaderNAC.cs" />
+    <Compile Include="Loaders\DataLoaderNAC.cs" />
     <Compile Include="Loaders\DataLoaderSNTL.cs" />
     <Compile Include="Loaders\DataLoaderSundex.cs" />
     <Compile Include="Loaders\FixedWidthField_Decimal.cs" />
