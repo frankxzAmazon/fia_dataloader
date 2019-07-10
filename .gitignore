@@ -1,5 +1,7 @@
 .vs
 packages
 DataLoaderOptionsTests/obj
-/DataLoaderOptions/obj
+DataLoaderOptions/obj
+DataLoaderOptions/bin
+
 
