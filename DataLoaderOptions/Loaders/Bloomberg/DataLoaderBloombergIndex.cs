@@ -57,10 +57,10 @@ namespace DataLoaderOptions
             ["SPMARC5P"] = "S&P Marc 5",
             ["SPX"] = "S&P 500",
             ["SX5E"] = "EURO STOXX",
-            ["TPX"]= "TPX",
-            ["HSI"]="HSI",
-            ["UKX"]= "UKX",
-            ["LBUSTRUU"]= "LBUSTRUU",
+            ["TPX"]= "Tokyo Price Index (TOPIX)",
+            ["HSI"]= "Hong Kong Hang Seng",
+            ["UKX"]= "FTSE 100",
+            ["LBUSTRUU"]= "Barclays US Aggregate Bond Index",
         };
         string inputFolder;
         static object toLock = new object();
