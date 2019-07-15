@@ -42,6 +42,10 @@ namespace DataLoaderOptions
             ["SPMARC5P Index"] = "SPMARC5P",
             ["SPX Index"] = "SPX",
             ["SX5E Index"] = "SX5E",
+            ["TPX Index"] = "TPX",
+            ["HSI Index"] = "HSI",
+            ["UKX Index"] = "UKX",
+            ["LBUSTRUU Index"] = "LBUSTRUU"
         };
         string inputFolder;
         static object toLock = new object();
