@@ -36,14 +36,26 @@ namespace DataLoaderOptions
                 foreach (string file in files)
                 {
                     // Only load the one that was created after 5PM
-                    int hour = Int32.Parse(file.Substring(file.IndexOf("_") + 1, 2));
-                    if (hour >= 17)
+                    bool loadVolFile = false;
+                    if (Path.GetFileName(file).Contains("Afternoon"))
+                    {
+                         loadVolFile = true;
+                    }
+                    else
+                    {
+                        int hour = Int32.Parse(file.Substring(file.IndexOf("_") + 1, 2));
+                        if (hour >= 17)
+                            {
+                            loadVolFile = true;
+                            }
+                    }
+                    if (loadVolFile==true)
                     {
                         DataTable outputData = CreateDataTable();
 
                         DateTime asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "yyyyMMdd") ?? throw new Exception();
                         FillDataTable(outputData, GetConnString(file, true), asOfDate);
-                        string fileName = $"{OutputPath}{asOfDate.ToString("yyyyMMdd")}BVOL_After5pm.txt";
+                        string fileName = $"{OutputPath}{asOfDate.ToString("yyyyMMdd")}BVOL_Afternoon.txt";
                         if (!File.Exists(fileName))
                         {
                             //int changeLogId = base.CreateChangeLog(fileName, Path.GetFileNameWithoutExtension(file), "VolSurface", DateTime.Now);

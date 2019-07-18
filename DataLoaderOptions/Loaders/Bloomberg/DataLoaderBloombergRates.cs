@@ -72,22 +72,30 @@ namespace DataLoaderOptions
                     DataTable outputData = CreateDataTable();
                     DateTime asOfDate = Extensions.Extensions.GetFirstDateFromString(Path.GetFileName(file), @"\d{8}", "yyyyMMdd") ?? throw new Exception();
                     FillDataTable(outputData, GetConnString(file, true), asOfDate);
-                    int hour = Int32.Parse(file.Substring(file.IndexOf("_") + 1, 2));
-                    string fileNewName;
-                    if (hour <= 10)
+                    string fileName;
+                    if (Path.GetFileName(file).Contains("Afternoon") || Path.GetFileName(file).Contains("Noon") || Path.GetFileName(file).Contains("Morning"))
                     {
-                        fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Morning.txt";
-                    }
-                    else if (hour <= 15)
-                    {
-                        fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Noon.txt";
+                        fileName = OutputPath + Path.GetFileName(file);
                     }
                     else
                     {
-                        fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Afternoon.txt";
-                    }
-                    string fileName = OutputPath + fileNewName;
 
+                        int hour = Int32.Parse(file.Substring(file.IndexOf("_") + 1, 2));
+                        string fileNewName;
+                        if (hour <= 10)
+                        {
+                            fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Morning.txt";
+                        }
+                        else if (hour <= 15)
+                        {
+                            fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Noon.txt";
+                        }
+                        else
+                        {
+                            fileNewName = $"{Path.GetFileName(file).Substring(0, 23)}Afternoon.txt";
+                        }
+                        fileName = OutputPath + fileNewName;
+                    }
                     //int changeLogId = base.CreateChangeLog(fileName, Path.GetFileNameWithoutExtension(file), "IndexSurface", DateTime.Now);
                     CorrectDataTable(outputData, fileName);
                     outputData.AcceptChanges();
