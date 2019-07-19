@@ -192,7 +192,7 @@ namespace DataLoaderOptions
                     //var tenor = tenors[(string)outputData.Rows[i]["Tenor"]];
                     DateTime priorDate = outputData.Rows[i - 1].Field<DateTime>("FutureDate");
                     DateTime CurrDate = outputData.Rows[i].Field<DateTime>("FutureDate");
-                    double tenor = Convert.ToDouble((CurrDate - priorDate).TotalDays.ToString())/360;
+                    double tenor = Convert.ToDouble((CurrDate - priorDate).TotalDays.ToString())/365;
                     double discFactor = outputData.Rows[i].Field<double>("DiscountFactor");
                     double priorDiscFactor = outputData.Rows[i-1].Field<double>("DiscountFactor");
 
