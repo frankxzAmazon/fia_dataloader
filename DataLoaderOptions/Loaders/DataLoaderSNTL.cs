@@ -37,7 +37,8 @@ namespace DataLoaderOptions
                 xl.SetDataTableFormat(outputData);
                 outputData = xl.GetFilledDataTable(OnError.UseNullValue);
                 outputData.AcceptChanges();
-                var asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{1,2}-\d{1,2}-\d{4}", "M-d-yyyy") ?? throw new Exception("Could not find date in string " + file);
+                //var asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{1,2}-\d{1,2}-\d{4}", "M-d-yyyy") ?? throw new Exception("Could not find date in string " + file);
+                var asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "MMddyyyy") ?? throw new Exception("Could not find date in string " + file);
 
                 UpdateAsOfDate(outputData, asOfDate, fileName);
                 outputData.AcceptChanges();
