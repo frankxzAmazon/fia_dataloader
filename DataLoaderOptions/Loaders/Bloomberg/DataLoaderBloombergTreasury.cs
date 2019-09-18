@@ -37,7 +37,7 @@ namespace DataLoaderOptions
         {
             lock (toLock)
             {
-                string[] files = Directory.GetFiles(inputFolder.ToString(), "*TreasCurveFnl*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(inputFolder.ToString(), "*TreasCurveFnl*", SearchOption.TopDirectoryOnly);
                 foreach (string file in files)
                 {
                     DataTable outputData = CreateDataTable();
