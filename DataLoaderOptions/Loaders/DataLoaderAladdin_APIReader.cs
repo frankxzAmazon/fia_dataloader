@@ -87,9 +87,6 @@ namespace DataLoaderOptions
 #endif
                         }
                     }
-#if DEBUG
-                    return;
-#endif
                     if (File.Exists(outfile))
                     {
                         File.Delete(outfile);
