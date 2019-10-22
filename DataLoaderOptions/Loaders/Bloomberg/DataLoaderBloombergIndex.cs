@@ -37,7 +37,11 @@ namespace DataLoaderOptions
             ["HSI Index"]="HSI",
             ["UKX Index"]= "UKX",
             ["LBUSTRUU Index"]= "LBUSTRUU",
-
+            ["BXIIF50E Index"]= "BXIIF50E",
+            ["SPXSRT5E Index"]= "SPXSRT5E",
+            ["SPECFR6P Index"]= "SPECFR6P",
+            ["SPXT5UE Index"]= "SPXT5UE",
+            ["SPLV5UT Index"]= "SPLV5UT",
         };
         Dictionary<string, string> tickerDesc = new Dictionary<string, string>()
         {
@@ -61,6 +65,12 @@ namespace DataLoaderOptions
             ["HSI"]= "Hong Kong Hang Seng",
             ["UKX"]= "FTSE 100",
             ["LBUSTRUU"]= "Barclays US Aggregate Bond Index",
+            ["BXIIF50E"]="Barclasy Focus50 Index",
+            ["SPXSRT5E"]="S &P 500 Sector Rotator Daily RC2 5% Index ER",
+            ["SPECFR6P"]= "S&P Economic Cycle Factor Rotator Index",
+            ["SPXT5UE"]= "S&P 500 Low Volatility Daily Risk Control 5% Index ER",
+            ["SPLV5UT"]= "S&P 500 Low Volatility Daily Risk Control 5% Index TR",
+
         };
         string inputFolder;
         static object toLock = new object();
