@@ -23,7 +23,7 @@ namespace DataLoaderOptions
                                              "iap", "vol", "div", "rates", "treasury","aladdin_api" ,"dlicnbfia10yrc","dlicnbfia7yrs"};
 
             // Current parameters
-            args = new string[] { "/loadOn", "nac" };
+            args = new string[] { "/loadOn", "elic" };
 
             // In case we need to run all the loaders at once, uncomment the following line:
             //args = all_loaders;
