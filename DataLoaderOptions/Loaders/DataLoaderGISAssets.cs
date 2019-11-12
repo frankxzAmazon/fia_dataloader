@@ -61,6 +61,12 @@ namespace DataLoaderOptions
                     using (SqlConnection con = new SqlConnection(sqlString))
                     {
                         con.Open();
+                        using (SqlCommand cmd = new SqlCommand($"delete from {SqlTableName}", con))
+                        {
+                            //   cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 0;
+                            cmd.ExecuteNonQuery();
+                        }
                         CheckSchema(con, outputData);
                     }
                     lock (toLock)
