@@ -40,7 +40,7 @@ namespace DataLoaderOptions
 
                     DataReader_Excel xl = new DataReader_Excel(file, wsName, headerRow);
                     xl.SetDataTableFormat(outputData);
-                    outputData = xl.GetFilledDataTable(OnError.UseNullValue);
+                    outputData = xl.GetFilledDataTable(OnError.UseNullValue,true,null,true);
                     DateTime asOfDate = (DateTime)xl.GetCell(3, 1);
 
                     UpdateAsOfDate(outputData, asOfDate, fileName);

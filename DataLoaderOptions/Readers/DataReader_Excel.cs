@@ -85,7 +85,7 @@ namespace DataLoaderOptions.Readers
                 }
             }
         }
-        public virtual DataTable GetFilledDataTable(OnError onError, bool hasHeader = true, DataTable template = null)
+        public virtual DataTable GetFilledDataTable(OnError onError, bool hasHeader = true, DataTable template = null, bool fixIdate = false)
         {
             if (ExcelSheet == null) LoadExcelFile();
             object[,] data = GetPartialArray(ExcelSheet, _headerRowBase0);
@@ -146,6 +146,11 @@ namespace DataLoaderOptions.Readers
                                 }
                                 else
                                 {
+                                    //and fixIdate== true
+                                    if (columnName == "IDATE"&&  fixIdate == true)
+                                    {
+                                        data[r, c] = new DateTime(1899, 12, 31).AddDays(Convert.ToDouble(data[r, c].ToString()) - 1);
+                                    }
                                     row[columnName] = Convert.ChangeType(data[r, c], dt.Columns[columnName].DataType);
                                 }
                             }
