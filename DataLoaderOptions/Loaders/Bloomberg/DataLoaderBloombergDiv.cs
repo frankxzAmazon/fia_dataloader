@@ -10,11 +10,13 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
 using CsvHelper;
+using log4net;
 
 namespace DataLoaderOptions
 {
     class DataLoaderBloombergDiv : DataLoader
     {
+        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         string inputFolder;
         static object toLock = new object();
         private static Dictionary<string, double> tenors = new Dictionary<string, double>()
@@ -151,6 +153,7 @@ namespace DataLoaderOptions
                         }
                         catch (Exception ex)
                         {
+                            log.Fatal("Error with DataLoader Bloomberg Div" + asOfDate);
                             Console.WriteLine(ex.Message);
                         }
                     }

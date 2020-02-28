@@ -12,6 +12,7 @@ using System.Globalization;
 using DataLoaderOptions.Readers;
 using Extensions;
 using CsvHelper;
+using log4net;
 
 namespace DataLoaderOptions
 {
@@ -20,6 +21,7 @@ namespace DataLoaderOptions
         string inputFolder;
         static object toLock = new object();
         int headerRow = 12;
+        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
 
         public DataLoaderAladdin_APIReader()
         {
@@ -81,6 +83,7 @@ namespace DataLoaderOptions
                         }
                         catch (Exception ex)
                         {
+                            log.Fatal("Error with DataLoader aladdin" + asOfDate);
                             Console.WriteLine(ex.Message);
 #if DEBUG
                             throw ex;

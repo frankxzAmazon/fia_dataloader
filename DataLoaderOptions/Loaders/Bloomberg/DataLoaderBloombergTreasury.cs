@@ -11,12 +11,13 @@ using System.Configuration;
 using System.Globalization;
 using CsvHelper;
 using Extensions;
+using log4net;
 
 namespace DataLoaderOptions
 {
     class DataLoaderBloombergTreasury : DataLoader
     {
-
+        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         string inputFolder;
         string[] tenors = new string[] { "1M", "2M", "3M", "6M", "1Y", "2Y", "3Y", "4Y", "5Y", "6Y", "7Y", "8Y", "9Y", "10Y", "15Y", "20Y", "25Y", "30Y" };
         static object toLock = new object();
@@ -61,15 +62,23 @@ namespace DataLoaderOptions
                                 }
                             }
                             outputData.AcceptChanges();
-                            using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                            try
                             {
-                                //Set the database table name
-                                sqlBulkCopy.BulkCopyTimeout = 0;
-                                sqlBulkCopy.DestinationTableName = SqlTableName;
-                                MapTable(sqlBulkCopy);
-                                sqlBulkCopy.WriteToServer(outputData);
+                                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                                {
+                                    //Set the database table name
+                                    sqlBulkCopy.BulkCopyTimeout = 0;
+                                    sqlBulkCopy.DestinationTableName = SqlTableName;
+                                    MapTable(sqlBulkCopy);
+                                    sqlBulkCopy.WriteToServer(outputData);
+                                }
+                                con.Close();
                             }
-                            con.Close();
+                            catch(Exception ex)
+                            {
+                                log.Fatal("Error with DataLoader Bloomberg Treasury" + asOfDate);
+                                Console.WriteLine(ex.Message);
+                            }
                         }
                         string fileName = OutputPath + Path.GetFileName(file);
                         if (File.Exists(fileName))
