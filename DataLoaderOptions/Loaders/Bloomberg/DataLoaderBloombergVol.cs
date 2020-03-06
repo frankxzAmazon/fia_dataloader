@@ -7,13 +7,11 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using log4net;
 
 namespace DataLoaderOptions
 {
     class DataLoaderBloombergVol : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         string inputFolder;
         static object toLock = new object();
 
@@ -145,7 +143,6 @@ namespace DataLoaderOptions
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Fatal("Error with DataLoader Bloomberg Vol" + asOfDate);
                                     Console.WriteLine(ex.Message);
                                 }
                             }

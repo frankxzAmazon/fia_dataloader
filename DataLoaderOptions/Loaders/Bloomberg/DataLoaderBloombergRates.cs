@@ -10,13 +10,11 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
 using CsvHelper;
-using log4net;
 
 namespace DataLoaderOptions
 {
     class DataLoaderBloombergRates : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         Dictionary<string, string> ignoreRates = new Dictionary<string, string>()
         {
             ["USSO4 BGN Curcny"]="",
@@ -153,8 +151,6 @@ namespace DataLoaderOptions
                         }
                         catch (Exception ex)
                         {
-                            log.Fatal("Error with DataLoader Bloomberg Rates" + asOfDate);
-
                             Console.WriteLine(ex.Message);
                         }
                     }

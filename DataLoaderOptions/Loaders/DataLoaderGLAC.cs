@@ -7,14 +7,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using log4net;
-
 
 namespace DataLoaderOptions.Loaders
 {
     class DataLoaderGLAC : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         string _folderPath;
         bool _hasHeaders;
         private List<IFixedWidthField> _fields = new List<IFixedWidthField>();
@@ -63,19 +60,11 @@ namespace DataLoaderOptions.Loaders
                     using (SqlConnection con = new SqlConnection(sqlString))
                     {
                         con.Open();
-                        try
+                        using (SqlCommand cmd = new SqlCommand("GIS.InsertGLAC", con))
                         {
-                            using (SqlCommand cmd = new SqlCommand("GIS.InsertGLAC", con))
-                            {
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.CommandTimeout = 0;
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Fatal("Error with DataLoader GLAC" + asOfDate);
-                            Console.WriteLine(ex.Message);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 0;
+                            cmd.ExecuteNonQuery();
                         }
                     }
                 }

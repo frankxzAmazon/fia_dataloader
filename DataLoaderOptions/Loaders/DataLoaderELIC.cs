@@ -5,14 +5,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using log4net;
 namespace DataLoaderOptions
 {
     class DataLoaderELIC : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         string _folderPath;
-        //string fileSubstring = ".csv";
+        string fileSubstring = ".csv";
         bool _hasHeaders;
 
         public override string SqlTableName => "GIS.PoliciesELIC";
@@ -76,7 +74,6 @@ namespace DataLoaderOptions
                 catch (Exception ex)
 
                 {
-                    log.Fatal("Error with DataLoader ELIC" + asOfDate);
                     Console.WriteLine(ex.Message);
                 }
                 finally
