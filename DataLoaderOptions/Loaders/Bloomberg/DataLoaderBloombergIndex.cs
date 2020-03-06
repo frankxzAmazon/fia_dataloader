@@ -10,13 +10,11 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
 using CsvHelper;
-using log4net;
 
 namespace DataLoaderOptions
 {
     class DataLoaderBloombergIndex : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
         Dictionary<string, string> index = new Dictionary<string, string>()
         {
             ["DBGLS2U5 Index"] = "DBGLS2U5",
@@ -172,8 +170,6 @@ namespace DataLoaderOptions
                         }
                         catch (Exception ex)
                         {
-                            log.Fatal("Error with DataLoader Bloomberg Index" + asOfDate);
-
                             Console.WriteLine(ex.Message);
                         }
                     }

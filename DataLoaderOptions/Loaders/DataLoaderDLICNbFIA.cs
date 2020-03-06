@@ -7,13 +7,11 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using log4net;
+
 namespace DataLoaderOptions
 {
     class DataLoaderDLICNbFIA : DataLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(Environment.MachineName);
-
         Dictionary<string, string> FundType = new Dictionary<string, string>()
         {
             {" DE FIA CROCI Annual Pt to Pt w/Sp 7 Yr", "Spread Rate"},
@@ -133,7 +131,6 @@ namespace DataLoaderOptions
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Fatal("Error with DataLoader DLIC" + asOfDate);
                                     Console.WriteLine(ex.Message);
                                 }
                             }
