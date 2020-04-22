@@ -81,6 +81,7 @@ namespace DataLoaderOptions
 
                 CorrectDataTable(outputData);
                 CorrectCoupon(outputData);
+                CorrectRawPremium(outputData);
                 outputData.AcceptChanges();
 
                 DateTime asOfDate = outputData.AsEnumerable().Select(x => x.Field<DateTime>("Current Index Date")).Max();
@@ -181,6 +182,16 @@ namespace DataLoaderOptions
                 else if ((decimal)row["Coupon Rate"] > 100)
                 {
                     row["Coupon Rate"] = (decimal)row["Coupon Rate"] / 100;
+                }
+            }
+        }
+        protected void CorrectRawPremium(DataTable outputData)
+        {
+            foreach (DataRow row in outputData.Rows)
+            {
+                if ((decimal)row["Raw Premium"] < 0)
+                {
+                    row["Raw Premium"] = -(decimal)row["Raw Premium"];
                 }
             }
         }
@@ -322,6 +333,12 @@ namespace DataLoaderOptions
                             }
                             else if (row[i] != "")
                             {
+                                if (row[i].StartsWith("(") & row[i].EndsWith(")"))
+                                {
+                                    int start = row[i].IndexOf("(") + 1;
+                                    int end = row[i].IndexOf(")", start);
+                                    row[i] = "-" + row[i].Substring(start, end - start);
+                                }
                                 toInsert[col.ColumnName] = Convert.ChangeType(row[i++], col.DataType);
                             }
                             else
