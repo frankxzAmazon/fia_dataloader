@@ -43,6 +43,7 @@ namespace DataLoaderOptions
             ["SPXT5UE Index"]= "SPXT5UE",
             ["SPLV5UT Index"]= "SPLV5UT",
             ["ASD1 Index"]= "ASD1",
+            ["CMRBEY5E Index"]= "CMRBEY5E"
         };
         Dictionary<string, string> tickerDesc = new Dictionary<string, string>()
         {
@@ -71,7 +72,8 @@ namespace DataLoaderOptions
             ["SPECFR6P"]= "S&P Economic Cycle Factor Rotator Index",
             ["SPXT5UE"]= "S&P 500 Low Volatility Daily Risk Control 5% Index ER",
             ["SPLV5UT"]= "S&P 500 Low Volatility Daily Risk Control 5% Index TR",
-            ["ASD1"] = "ASD1"
+            ["ASD1"] = "Generic 1st ASD future",
+            ["CMRBEY5E"]="RBA select equity yield CIBC 5% Index"
         };
         string inputFolder;
         static object toLock = new object();
