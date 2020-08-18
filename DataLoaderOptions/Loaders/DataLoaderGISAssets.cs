@@ -26,7 +26,7 @@ namespace DataLoaderOptions
             OutputPath = @"W:\DACT\ALM\FIAHedging\DBUpload\GIS Assets\";
         }
 
-        public override string SqlTableName => "GIS.InvDailyOptionDataReport";
+        public override string SqlTableName => "GIS.InvDailyOptionDataReport_test"; /// SqlTableName 
         public override void LoadToSql()
         {
 
@@ -47,9 +47,9 @@ namespace DataLoaderOptions
                     fileName = "Daily Option Data.xlsx";
                 }
                 xl.SetDataTableFormat(outputData);
-                outputData = xl.GetFilledDataTable(OnError.UseNullValue);
+                outputData = xl.GetFilledDataTable(OnError.UseNullValue); // after call the GetFilledDataTable outputData=dt 
 
-                CorrectDataTable(outputData, file);
+                CorrectDataTable(outputData, file);  
                 outputData.AcceptChanges();
                 if (outputData.Rows.Count > 0)
                 {
@@ -61,7 +61,7 @@ namespace DataLoaderOptions
                     using (SqlConnection con = new SqlConnection(sqlString))
                     {
                         con.Open();
-                        using (SqlCommand cmd = new SqlCommand($"delete from {SqlTableName}", con))
+                        using (SqlCommand cmd = new SqlCommand($"delete from {SqlTableName}", con)) //"GIS.InvDailyOptionDataReport" 
                         {
                             //   cmd.CommandType = CommandType.StoredProcedure;
                             cmd.CommandTimeout = 0;
@@ -69,9 +69,9 @@ namespace DataLoaderOptions
                         }
                         CheckSchema(con, outputData);
                     }
-                    lock (toLock)
+                    lock (toLock)     
                     {
-                        base.LoadData(outputData);
+                        base.LoadData(outputData);  // check the table "[AlmHedgingStaging].[GIS].[InvDailyOptionDataReport_test]"
                     }
                     if (ToLoad)
                     {
@@ -80,7 +80,7 @@ namespace DataLoaderOptions
                             using (SqlConnection con = new SqlConnection(sqlString))
                             {
                                 con.Open();
-                                using (SqlCommand cmd = new SqlCommand("GIS.InsertAssets", con))
+                                using (SqlCommand cmd = new SqlCommand("GIS.InsertAssets_test1", con)) //  procedures in AlmHedgingStaging.GIS.InsertAssets
                                 {
                                     cmd.CommandType = CommandType.StoredProcedure;
                                     cmd.CommandTimeout = 0;
@@ -108,11 +108,13 @@ namespace DataLoaderOptions
             tbl.Columns.Add("LoadDate", typeof(DateTime));
             tbl.Columns.Add("Source", typeof(string));
             tbl.Columns.Add("UserId", typeof(string));
-            tbl.Columns.Add("As of Date", typeof(DateTime));
+            tbl.Columns.Add("As of Date", typeof(DateTime));      
             tbl.Columns.Add("As of Market Price", typeof(DateTime));
             tbl.Columns.Add("Portfolio Short Name", typeof(string));
             tbl.Columns.Add("CUSIP", typeof(string));
-            tbl.Columns.Add("Issue Date Of Sec", typeof(DateTime));
+            tbl.Columns.Add("Issue Date Of Sec", typeof(DateTime));          
+            tbl.Columns.Add("Issue Date Of Sec CDF", typeof(DateTime));// "Issue Date of Sec CDF" will replace the place for Issue Date Of Sec in the stored procedure
+            tbl.Columns.Add("Notice Date Of Sec CDF", typeof(DateTime));// new
             tbl.Columns.Add("Counterparty Broker", typeof(string));
             tbl.Columns.Add("SM Description", typeof(string));
             tbl.Columns.Add("SM2 Desc Class Cap", typeof(decimal));
@@ -122,7 +124,7 @@ namespace DataLoaderOptions
             tbl.Columns.Add("BRS Current Face",typeof(decimal));
             tbl.Columns.Add("BRS Full Market Value",typeof(decimal));
             tbl.Columns.Add("BRS Purchase Price", typeof(decimal));
-            return tbl;
+            return tbl;  //tbl is in the same layout as  [AlmHedgingStaging].[GIS].[InvDailyOptionDataReport] , the first three are not from input file. => outputData
         }
         protected void CorrectDataTable(DataTable outputData, string source)
         {
@@ -138,9 +140,9 @@ namespace DataLoaderOptions
                 }
                 if (row["CUSIP"] != DBNull.Value && (string)row["CUSIP"] == "BGH4MRAT0")
                 {
-                    row["Issue Date Of Sec"] = DateTime.Parse("2016-05-25");
+                    row["Issue Date Of Sec"] = DateTime.Parse("2016-05-25"); 
                 }
-                if (row["As of Date"] == DBNull.Value || row["Option Strike Price"] == DBNull.Value || row["Maturity Date"] == DBNull.Value || row["Issue Date Of Sec"] == DBNull.Value)
+                if (row["As of Date"] == DBNull.Value || row["Option Strike Price"] == DBNull.Value || row["Maturity Date"] == DBNull.Value || row["Issue Date Of Sec CDF"] == DBNull.Value)
                 {
                     row.Delete();
                 }
@@ -160,7 +162,8 @@ namespace DataLoaderOptions
                 {
                     if(table.Columns.Contains(col.ColumnName))
                     {
-                        if(!table.Columns[col.ColumnName].AllowDBNull && row[col.ColumnName] == DBNull.Value)
+                       // table.Columns["Notice Date Of Sec CDF"].AllowDBNull = true; /// there are null for that column "Notice Date Of Sec CDF"
+                        if (!table.Columns[col.ColumnName].AllowDBNull && row[col.ColumnName] == DBNull.Value)
                         {
                             if (col.ColumnName == "PM Bucket")
                             {
@@ -188,6 +191,8 @@ namespace DataLoaderOptions
             sqlBulkCopy.ColumnMappings.Add("Portfolio Short Name", "Portfolio Short Name");
             sqlBulkCopy.ColumnMappings.Add("CUSIP", "CUSIP");
             sqlBulkCopy.ColumnMappings.Add("Issue Date Of Sec", "Issue Date Of Sec");
+            sqlBulkCopy.ColumnMappings.Add("Issue Date Of Sec CDF", "Issue Date Of Sec CDF"); // new
+            sqlBulkCopy.ColumnMappings.Add("Notice Date Of Sec CDF", "Notice Date Of Sec CDF");// new 
             sqlBulkCopy.ColumnMappings.Add("SM Description", "SM Description");
             sqlBulkCopy.ColumnMappings.Add("Counterparty Broker", "Counterparty Broker");
             sqlBulkCopy.ColumnMappings.Add("SM2 Desc Class Cap", "SM2 Desc Class Cap");
