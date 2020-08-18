@@ -26,7 +26,7 @@ namespace DataLoaderOptions
             OutputPath = @"W:\DACT\ALM\FIAHedging\DBUpload\GIS Assets\";
         }
 
-        public override string SqlTableName => "GIS.InvDailyOptionDataReport_test"; /// SqlTableName 
+        public override string SqlTableName => "GIS.InvDailyOptionDataReport"; /// SqlTableName 
         public override void LoadToSql()
         {
 
@@ -71,7 +71,7 @@ namespace DataLoaderOptions
                     }
                     lock (toLock)     
                     {
-                        base.LoadData(outputData);  // check the table "[AlmHedgingStaging].[GIS].[InvDailyOptionDataReport_test]"
+                        base.LoadData(outputData);  // check the table "[AlmHedgingStaging].[GIS].[InvDailyOptionDataReport]"
                     }
                     if (ToLoad)
                     {
@@ -80,7 +80,7 @@ namespace DataLoaderOptions
                             using (SqlConnection con = new SqlConnection(sqlString))
                             {
                                 con.Open();
-                                using (SqlCommand cmd = new SqlCommand("GIS.InsertAssets_test1", con)) //  procedures in AlmHedgingStaging.GIS.InsertAssets
+                                using (SqlCommand cmd = new SqlCommand("GIS.InsertAssets", con)) //  procedures in AlmHedgingStaging.GIS.InsertAssets
                                 {
                                     cmd.CommandType = CommandType.StoredProcedure;
                                     cmd.CommandTimeout = 0;
@@ -162,7 +162,7 @@ namespace DataLoaderOptions
                 {
                     if(table.Columns.Contains(col.ColumnName))
                     {
-                       // table.Columns["Notice Date Of Sec CDF"].AllowDBNull = true; /// there are null for that column "Notice Date Of Sec CDF"
+                        table.Columns["Notice Date Of Sec CDF"].AllowDBNull = true; /// there are null for that column "Notice Date Of Sec CDF"
                         if (!table.Columns[col.ColumnName].AllowDBNull && row[col.ColumnName] == DBNull.Value)
                         {
                             if (col.ColumnName == "PM Bucket")
