@@ -129,12 +129,12 @@ namespace DataLoaderOptions
                                         cmd.CommandTimeout = 0;
                                         cmd.ExecuteNonQuery();
                                     }
-                                    using (SqlCommand cmd = new SqlCommand("DLIC.InsertOynxNbFIA", con))
+/*                                    using (SqlCommand cmd = new SqlCommand("DLIC.InsertOynxNbFIA", con))
                                     {
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
                                         cmd.ExecuteNonQuery();
-                                    }
+                                    }*/
 
 
                                 }
