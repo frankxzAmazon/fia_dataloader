@@ -116,7 +116,13 @@ namespace DataLoaderOptions
             tbl.Columns.Add(@"SecDesc2", typeof(decimal));
             tbl.Columns.Add(@"Purchase_Price", typeof(decimal));
             tbl.Columns.Add(@"Initial_Level_Coupon", typeof(decimal));
-
+            tbl.Columns.Add(@"Sec_Group", typeof(string));
+            tbl.Columns.Add(@"Sec_Type", typeof(string));
+            tbl.Columns.Add(@"Ticker", typeof(string));
+            tbl.Columns.Add(@"Sm_Sec_Desc2", typeof(string));
+            tbl.Columns.Add(@"Sm_Sec_Desc1", typeof(string));
+            tbl.Columns.Add(@"Currency", typeof(string));
+            tbl.Columns.Add(@"mkt_value", typeof(decimal));
             return tbl;
         }
 
@@ -251,6 +257,14 @@ namespace DataLoaderOptions
             sqlBulkCopy.ColumnMappings.Add(@"SecDesc2", @"SecDesc2");
             sqlBulkCopy.ColumnMappings.Add(@"Purchase_Price", @"Purchase Price"); 
             sqlBulkCopy.ColumnMappings.Add(@"Initial_Level_Coupon", @"Initial Level Coupon");
+            sqlBulkCopy.ColumnMappings.Add(@"Sec_Group", @"Sec_Group");
+            sqlBulkCopy.ColumnMappings.Add(@"Sec_Type", @"Sec_Type");
+            sqlBulkCopy.ColumnMappings.Add(@"Ticker", @"Ticker");
+            sqlBulkCopy.ColumnMappings.Add(@"Sm_Sec_Desc2", @"Sm_Sec_Desc2");
+            sqlBulkCopy.ColumnMappings.Add(@"Sm_Sec_Desc1", @"Sm_Sec_Desc1");
+            sqlBulkCopy.ColumnMappings.Add(@"Currency", @"Currency");
+            sqlBulkCopy.ColumnMappings.Add(@"mkt_value", @"mkt_value");
+
         }
     }
 }
