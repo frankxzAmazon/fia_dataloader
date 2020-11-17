@@ -84,30 +84,19 @@ namespace DataLoaderOptions
                 CorrectRawPremium(outputData);
                 outputData.AcceptChanges();
 
-                // DateTime asOfDate = outputData.AsEnumerable().Select(x => x.Field<DateTime>("Current Index Date")).Max();
-                //DateTime asOfDate = new DateTime(2020, 11, 16);
-                DateTime asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "yyyyMMdd")?? DateTime.Now;
-                string outfile;
-                   
+                DateTime asOfDate = outputData.AsEnumerable().Select(x => x.Field<DateTime>("Current Index Date")).Max();
+                string outfile = OutputPath + "Rpt_FIA_Invstmnt_Sales_7Yr_10Yr_Combined-" + asOfDate.ToString("yyyyMMdd") + ".csv";
                 if (outputData.Rows.Count > 0)
                 {
                     //string filepath = OutputPath + Path.GetFileName(file);
+                    UpdateAsOfDate(outputData, asOfDate, outfile);
+                    outputData.AcceptChanges();
                     lock (toLock)
                     {
-                        string sqlString = ConfigurationManager.ConnectionStrings["Staging"].ConnectionString;
+                        string sqlString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
                         using (SqlConnection con = new SqlConnection(sqlString))
                         {
                             con.Open();
-                            using (SqlCommand cmd = new SqlCommand("SELECT  max([LastBusinessDay]) as inforcedate  FROM ALMHedging.dbo.dimDate where [CalendarDate] <@ReportDate",con))
-                            {
-                                cmd.Parameters.AddWithValue("@ReportDate", asOfDate);
-                                //cmd.ExecuteReader();
-                                cmd.CommandTimeout = 0;
-                                asOfDate= (DateTime) cmd.ExecuteScalar();
-                                outfile = OutputPath + "Rpt_FIA_Invstmnt_Sales_7Yr_10Yr_Combined-" + asOfDate.ToString("yyyyMMdd") + ".csv";
-                            }
-                            UpdateAsOfDate(outputData, asOfDate, outfile);
-                            outputData.AcceptChanges();
                             using (SqlCommand cmd = new SqlCommand($"delete from {SqlTableName}", con))
                             {
                                 //cmd.CommandType = CommandType.Text;
