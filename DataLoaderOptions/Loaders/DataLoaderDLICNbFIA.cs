@@ -86,8 +86,10 @@ namespace DataLoaderOptions
 
                 // DateTime asOfDate = outputData.AsEnumerable().Select(x => x.Field<DateTime>("Current Index Date")).Max();
                 //DateTime asOfDate = new DateTime(2020, 11, 16);
-                DateTime asOfDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "yyyyMMdd") ?? DateTime.Now;
+                DateTime runDate = Extensions.Extensions.GetFirstDateFromString(file, @"\d{8}", "yyyyMMdd") ?? DateTime.Now;
                 string outfile;
+
+                DateTime asOfDate;
 
                 if (outputData.Rows.Count > 0)
                 {
@@ -100,11 +102,11 @@ namespace DataLoaderOptions
                             con.Open();
                             using (SqlCommand cmd = new SqlCommand("SELECT  max([LastBusinessDay]) as inforcedate  FROM ALMHedging.dbo.dimDate where [CalendarDate] <@ReportDate", con))
                             {
-                                cmd.Parameters.AddWithValue("@ReportDate", asOfDate);
+                                cmd.Parameters.AddWithValue("@ReportDate", runDate);
                                 //cmd.ExecuteReader();
                                 cmd.CommandTimeout = 0;
                                 asOfDate = (DateTime)cmd.ExecuteScalar();
-                                outfile = OutputPath + "Rpt_FIA_Invstmnt_Sales_7Yr_10Yr_Combined-" + asOfDate.ToString("yyyyMMdd") + ".csv";
+                                outfile = OutputPath + "Rpt_FIA_Invstmnt_Sales_7Yr_10Yr_Combined-" + runDate.ToString("yyyyMMdd") + ".csv";
                             }
                             UpdateAsOfDate(outputData, asOfDate, outfile);
                             outputData.AcceptChanges();
