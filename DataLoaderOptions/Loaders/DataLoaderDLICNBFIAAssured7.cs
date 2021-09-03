@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.OleDb;
-using System.Data.SqlClient;
+﻿using CsvHelper;
+using System;
 using System.Configuration;
-using System.Globalization;
-using DataLoaderOptions.Readers;
-using CsvHelper;
-using Excel = Microsoft.Office.Interop.Excel;
-using ExcelDataReader;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace DataLoaderOptions
 {
-    class DataLoaderDLICNbFIA7YrS : DataLoader
+    class DataLoaderDLICNbFIAAssured7 : DataLoader
     {
 
         string inputFolder;
         static object toLock = new object();
         int headerRow = 1;
-        public DataLoaderDLICNbFIA7YrS()
+        public DataLoaderDLICNbFIAAssured7()
         {
-            inputFolder = "W:\\DACT\\ALM\\FIAHedging\\DBUpload\\DLIC NB FIA RS7\\ToUpload\\";
-            OutputPath = "W:\\DACT\\ALM\\FIAHedging\\DBUpload\\DLIC NB FIA RS7\\";
+            inputFolder = "W:\\DACT\\ALM\\FIAHedging\\DBUpload\\DLIC NB Assured 7\\ToUpload\\";
+            OutputPath = "W:\\DACT\\ALM\\FIAHedging\\DBUpload\\DLIC NB Assured 7\\";
         }
 
         public override string SqlTableName => "DLIC.PoliciesNBFIAIssueState";
@@ -45,6 +38,7 @@ namespace DataLoaderOptions
                     File.Delete(file);
                 }
                 string fileCsv = inputFolder + Path.GetFileNameWithoutExtension(file) + ".csv";
+
                 FillDataTable(outputData, GetConnString(fileCsv, true), infile);
 
                 // Comment this out: this code is for reading an Excel file
@@ -101,7 +95,7 @@ namespace DataLoaderOptions
                             {
                                 try
                                 {
-                                    using (SqlCommand cmd = new SqlCommand("DLIC.UpdateIssueState", con))
+                                    using (SqlCommand cmd = new SqlCommand("DLIC.UpdateIssueStateTest", con))
                                     {
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
@@ -112,10 +106,10 @@ namespace DataLoaderOptions
                                 {
                                     Console.WriteLine(ex.Message);
                                 }
-                            }*/
+                            }
+                            */
                         }
                     }
-
                     if (File.Exists(outfile))
                     {
                         File.Delete(outfile);
@@ -181,7 +175,7 @@ namespace DataLoaderOptions
             tbl.Columns.Add("INCOME RIDER ELECTION", typeof(string));
             tbl.Columns.Add("ROP", typeof(string));
             tbl.Columns.Add("Single/Multiple Allocation", typeof(string));
-            tbl.Columns.Add("Source").DefaultValue = "RS 7";
+            tbl.Columns.Add("Source").DefaultValue = "Assured 7";
 
             return tbl;
         }
@@ -273,6 +267,7 @@ namespace DataLoaderOptions
             sqlBulkCopy.ColumnMappings.Add("Contract Number", "ContractNumber");
             sqlBulkCopy.ColumnMappings.Add("Issue State", "IssueState");
             sqlBulkCopy.ColumnMappings.Add("Source", "Source");
+
         }
 
         static void ConvertExcelToCsvInterop(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)

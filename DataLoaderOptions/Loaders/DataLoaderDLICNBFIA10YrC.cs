@@ -84,11 +84,18 @@ namespace DataLoaderOptions
                                 sqlBulkCopy.BulkCopyTimeout = 0;
                                 sqlBulkCopy.WriteToServer(outputData);
                             }
+                            if (CheckSource())
+                            {
+                                IDataLoader loader;
+                                loader = new DataLoaderDLICNbFIA();
+                                loader.LoadToSql();
+                            }
+                            /*
                             if (ToLoad)
                             {
                                 try
                                 {
-                                    using (SqlCommand cmd = new SqlCommand("DLIC.UpdateIssueState", con))
+                                    using (SqlCommand cmd = new SqlCommand("DLIC.UpdateIssueStateTest", con))
                                     {
                                         cmd.CommandType = CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
@@ -99,7 +106,7 @@ namespace DataLoaderOptions
                                 {
                                     Console.WriteLine(ex.Message);
                                 }
-                            }
+                            }*/
                         }
                     }
                     if (File.Exists(outfile))
@@ -167,7 +174,7 @@ namespace DataLoaderOptions
             tbl.Columns.Add("INCOME RIDER ELECTION", typeof(string));
             tbl.Columns.Add("ROP", typeof(string));
             tbl.Columns.Add("Single/Multiple Allocation", typeof(string));
-
+            tbl.Columns.Add("Source").DefaultValue = "RC 10";
             return tbl;
         }
         //protected void CorrectDataTable(DataTable outputData)
@@ -257,7 +264,7 @@ namespace DataLoaderOptions
 
             sqlBulkCopy.ColumnMappings.Add("Contract Number", "ContractNumber");
             sqlBulkCopy.ColumnMappings.Add("Issue State", "IssueState");
-
+            sqlBulkCopy.ColumnMappings.Add("Source", "Source");
         }
 
         static void ConvertExcelToCsvInterop(string excelFilePath, string csvOutputFile, int worksheetNumber = 1)

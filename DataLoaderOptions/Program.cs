@@ -20,10 +20,10 @@ namespace DataLoaderOptions
             // All the possible run parameters
             var all_loaders = new string[] { "aladdin", "dlicnbfia", "bc", "baml", "bnp", "cs", "jp", /* "citi", "citiglac", */ "db",
                                              "gs", "ms", "wf", "keyport", "sundex", "elic", "sntl", "glac", "gisassets", "nac",
-                                             "iap", "vol", "div", "rates", "treasury","aladdin_api" ,"dlicnbfia10yrc","dlicnbfia7yrs"};
+                                             "iap", "vol", "div", "rates", "treasury","aladdin_api", "dlicnbfia10yrc", "dlicnbfia7yrs", "dlicnbfiaassured7", "dlicnbfiatarget10"};
 
             // Current parameters
-            args = new string[] { "/loadOn", "dlicnbfia" };
+            args = new string[] { "/loadOn","dlicnbfiatarget10"};
 
             // In case we need to run all the loaders at once, uncomment the following line:
             //args = all_loaders;
@@ -55,6 +55,12 @@ namespace DataLoaderOptions
                         break;
                     case "dlicnbfia7yrs":
                         loader = new DataLoaderDLICNbFIA7YrS();
+                        break;
+                    case "dlicnbfiaassured7":
+                        loader = new DataLoaderDLICNbFIAAssured7();
+                        break;
+                    case "dlicnbfiatarget10":
+                        loader = new DataLoaderDLICNbFIATarget10();
                         break;
                     //case "dlicasset":
                     //    DataLoaderDLICAsset dlicAsset = new DataLoaderDLICAsset();

@@ -185,6 +185,8 @@
     <Compile Include="Loaders\DataLoaderAladdin_APIReader.cs" />
     <Compile Include="Loaders\DataLoaderDLICNBFIA10YrC.cs" />
     <Compile Include="Loaders\DataLoaderDLICNBFIA7YrS.cs" />
+    <Compile Include="Loaders\DataLoaderDLICNBFIAAssured7.cs" />
+	<Compile Include="Loaders\DataLoaderDLICNBFIATarget10.cs" />
     <Compile Include="Loaders\DataLoaderDLICRateSetting.cs" />
     <Compile Include="Loaders\DataLoaderAladdin.cs" />
     <Compile Include="Loaders\DataLoaderGISAssets.cs" />
