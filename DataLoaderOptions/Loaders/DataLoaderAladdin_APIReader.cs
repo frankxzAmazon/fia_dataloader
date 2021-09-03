@@ -23,7 +23,7 @@ namespace DataLoaderOptions
 
         public DataLoaderAladdin_APIReader()
         {
-            inputFolder = @"W:\DACT\ALM\FIAHedging\DBUpload\Aladdin\ToUpload\";
+            inputFolder = @"F:\actuary\DACT\ALM\FIAHedging\DBUpload\Aladdin\ToUpload\";
             OutputPath = @"W:\DACT\ALM\FIAHedging\DBUpload\Aladdin\";
         }
 

@@ -28,6 +28,19 @@ namespace DataLoaderOptions
         public bool useDevDB { get; set; }
         public abstract string SqlTableName { get; }
         public string OutputPath { get; protected set; }
+        public bool CheckSource()
+        {
+            //checks if all 4 sources are in the database before loading DLICNBFIA
+            string connectionString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                SqlCommand sourceCount = new SqlCommand("select count(distinct source) as NumSource from DLIC.PoliciesNBFIAIssueState", con);
+                int numCount = System.Convert.ToInt32(sourceCount.ExecuteScalar());
+                return numCount == 4;
+            }
+        }
+
         public virtual void LoadData(DataTable outputData)
         {
             string connection = useDevDB ? "Testing" : "Staging";

@@ -53,7 +53,11 @@ namespace DataLoaderOptions
         public override string SqlTableName => "DLIC.PoliciesNbFIA";
         public override void LoadToSql()
         {
-
+            if (!CheckSource())
+            {
+                return;
+            }
+           
             string[] files = Directory.GetFiles(inputFolder.ToString(), "*", SearchOption.TopDirectoryOnly);
             foreach (string file in files)
             {
@@ -142,12 +146,12 @@ namespace DataLoaderOptions
                                         cmd.CommandTimeout = 0;
                                         cmd.ExecuteNonQuery();
                                     }
-                                    /*                                    using (SqlCommand cmd = new SqlCommand("DLIC.InsertOynxNbFIA", con))
+                                                                        using (SqlCommand cmd = new SqlCommand("DLIC.InsertOynxNbFIA", con))
                                                                         {
                                                                             cmd.CommandType = CommandType.StoredProcedure;
                                                                             cmd.CommandTimeout = 0;
                                                                             cmd.ExecuteNonQuery();
-                                                                        }*/
+                                                                        }
 
 
                                 }
