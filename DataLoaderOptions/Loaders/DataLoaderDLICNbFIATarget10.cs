@@ -86,9 +86,7 @@ namespace DataLoaderOptions
                             }
                             if (CheckSource())
                             {
-                                IDataLoader loader;
-                                loader = new DataLoaderDLICNbFIA();
-                                loader.LoadToSql();
+                                LoadDLICNBFIA();
                             }
                             /*
                             if (ToLoad)

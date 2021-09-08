@@ -40,6 +40,13 @@ namespace DataLoaderOptions
                 return numCount == 4;
             }
         }
+        public void LoadDLICNBFIA()
+        {
+            IDataLoader loader;
+            loader = new DataLoaderDLICNbFIA();
+            loader.ToLoad = true;
+            loader.LoadToSql();
+        }
 
         public virtual void LoadData(DataTable outputData)
         {
