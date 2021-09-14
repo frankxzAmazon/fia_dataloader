@@ -35,9 +35,9 @@ namespace DataLoaderOptions
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-                SqlCommand sourceCount = new SqlCommand("select count(distinct source) as NumSource from DLIC.PoliciesNBFIAIssueState", con);
+                SqlCommand sourceCount = new SqlCommand("select count(distinct source) as NumSource from DLIC.PoliciesNBFIAIssueState  where Source in ('RS 7','RC 10')"   , con);
                 int numCount = System.Convert.ToInt32(sourceCount.ExecuteScalar());
-                return numCount == 4;
+                return numCount == 2;
             }
         }
         public void LoadDLICNBFIA()

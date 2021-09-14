@@ -15,7 +15,7 @@ namespace DataLoaderOptions
             // This #if DEBUG region ensure that we only run this block and set the arguments manually if we are in debug mode
 #if DEBUG
             // If we're in debug mode, then defualt to not wanting to load the data unless the /loadOn parameter is specified.
-            toLoad = false;
+            toLoad = true;
 
             // All the possible run parameters
             var all_loaders = new string[] { "aladdin", "dlicnbfia", "bc", "baml", "bnp", "cs", "jp", /* "citi", "citiglac", */ "db",
@@ -23,7 +23,7 @@ namespace DataLoaderOptions
                                              "iap", "vol", "div", "rates", "treasury","aladdin_api", "dlicnbfia10yrc", "dlicnbfia7yrs", "dlicnbfiaassured7", "dlicnbfiatarget10"};
 
             // Current parameters
-            args = new string[] { "/loadOn","dlicnbfiatarget10"};
+            args = new string[] { "/loadOn", "dlicnbfia" }; 
 
             // In case we need to run all the loaders at once, uncomment the following line:
             //args = all_loaders;
