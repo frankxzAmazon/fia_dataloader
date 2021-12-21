@@ -124,6 +124,7 @@ namespace DataLoaderOptions
             tbl.Columns.Add(new DataColumn("SumOfFVMIN0", typeof(decimal)) { AllowDBNull = true });
             tbl.Columns.Add(new DataColumn("Count", typeof(int)) { AllowDBNull = true });
             tbl.Columns.Add(new DataColumn("Index", typeof(string)) { AllowDBNull = true });
+            tbl.Columns.Add(new DataColumn("EISPREAD", typeof(string)) { AllowDBNull = true });
 
             return tbl;
         }
@@ -167,6 +168,8 @@ namespace DataLoaderOptions
             sqlBulkCopy.ColumnMappings.Add("SumOfFVMIN0", "SumOfFVMIN0");
             sqlBulkCopy.ColumnMappings.Add("Count", "Count");
             sqlBulkCopy.ColumnMappings.Add("Index", "Index");
+            sqlBulkCopy.ColumnMappings.Add("EISPREAD", "EISPREAD");
+
         }
     }
 }
