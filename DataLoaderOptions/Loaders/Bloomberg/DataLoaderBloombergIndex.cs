@@ -162,10 +162,10 @@ namespace DataLoaderOptions
             ["ESZ7"] = "S&P mini future",
             ["ESZ8"] = "S&P mini future",
             ["ESZ9"] = "S&P mini future",
-            ["ESA"] = "ESA",
-            ["RTYA"] = "RTYA",
-            ["MSFA"] = "MFSA",
-            ["NQA"] = "NQA"
+            ["ESA"] = "E-mini S&P 500 Futures Active Contract",
+            ["RTYA"] = "E-mini Russell 2000 Index Futures Active Contract",
+            ["MSFA"] = "MSCI EAFE Index Futures Active Contract",
+            ["NQA"] = "NASDAQ 100 E-mini Active Contract"
 
 
         };
