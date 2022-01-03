@@ -84,7 +84,11 @@ namespace DataLoaderOptions
             ["ESZ6 Index"] = "ESZ6",
             ["ESZ7 Index"] = "ESZ7",
             ["ESZ8 Index"] = "ESZ8",
-            ["ESZ9 Index"] = "ESZ9"
+            ["ESZ9 Index"] = "ESZ9",
+            ["ESA Index"]="ESA",
+            ["RTYA Index"]="RTYA",
+            ["MSFA Index"]="MFSA",
+            ["NQA Index"]="NQA"
 
 
         };
@@ -157,7 +161,11 @@ namespace DataLoaderOptions
             ["ESZ6"] = "S&P mini future",
             ["ESZ7"] = "S&P mini future",
             ["ESZ8"] = "S&P mini future",
-            ["ESZ9"] = "S&P mini future"
+            ["ESZ9"] = "S&P mini future",
+            ["ESA"] = "ESA",
+            ["RTYA"] = "RTYA",
+            ["MSFA"] = "MFSA",
+            ["NQA"] = "NQA"
 
 
         };
