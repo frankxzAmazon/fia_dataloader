@@ -88,7 +88,8 @@ namespace DataLoaderOptions
             ["ESA Index"]="ESA",
             ["RTYA Index"]="RTYA",
             ["MFSA Index"] = "MFSA",
-            ["NQA Index"]="NQA"
+            ["NQA Index"]="NQA",
+            ["MXEA Index"]="MXEA"
 
 
         };
@@ -165,7 +166,8 @@ namespace DataLoaderOptions
             ["ESA"] = "E-mini S&P 500 Futures Active Contract",
             ["RTYA"] = "E-mini Russell 2000 Index Futures Active Contract",
             ["MFSA"] = "MSCI EAFE Index Futures Active Contract",
-            ["NQA"] = "NASDAQ 100 E-mini Active Contract"
+            ["NQA"] = "NASDAQ 100 E-mini Active Contract",
+            ["MXEA"]="MSCI EAFE Index"
 
 
         };
