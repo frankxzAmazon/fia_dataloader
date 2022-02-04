@@ -26,7 +26,7 @@ namespace DataLoaderOptions
             OutputPath = @"W:\DACT\ALM\FIAHedging\DBUpload\GIS Assets\";
         }
 
-        public override string SqlTableName => "GIS.InvDailyOptionDataReport"; /// SqlTableName 
+        public override string SqlTableName => "GIS.InvDailyOptionDataReport_new"; /// SqlTableName 
         public override void LoadToSql()
         {
 
@@ -109,16 +109,16 @@ namespace DataLoaderOptions
             tbl.Columns.Add("Source", typeof(string));
             tbl.Columns.Add("UserId", typeof(string));
             tbl.Columns.Add("As of Date", typeof(DateTime));      
-            tbl.Columns.Add("As of Market Price", typeof(DateTime));
+            //tbl.Columns.Add("As of Market Price", typeof(DateTime));
             tbl.Columns.Add("Portfolio Short Name", typeof(string));
             tbl.Columns.Add("CUSIP", typeof(string));
-            tbl.Columns.Add("Issue Date Of Sec", typeof(DateTime));          
+            //tbl.Columns.Add("Issue Date Of Sec", typeof(DateTime));          
             tbl.Columns.Add("Issue Date Of Sec CDF", typeof(DateTime));// "Issue Date of Sec CDF" will replace the place for Issue Date Of Sec in the stored procedure
             tbl.Columns.Add("Notice Date Of Sec CDF", typeof(DateTime));// new
+            tbl.Columns.Add("Security Description", typeof(string));
             tbl.Columns.Add("Counterparty Broker", typeof(string));
-            tbl.Columns.Add("SM Description", typeof(string));
-            tbl.Columns.Add("SM2 Desc Class Cap", typeof(decimal));
-            tbl.Columns.Add("PM Bucket", typeof(string));
+            tbl.Columns.Add("Security Description 2", typeof(decimal));
+            tbl.Columns.Add("Core Path", typeof(string));
             tbl.Columns.Add("Option Strike Price", typeof(decimal));
             tbl.Columns.Add("Maturity Date", typeof(DateTime));
             tbl.Columns.Add("BRS Current Face",typeof(decimal));
@@ -134,9 +134,9 @@ namespace DataLoaderOptions
                 row["LoadDate"] = loadDate;
                 row["UserID"] = Environment.UserName;
                 row["Source"] = source;
-                if (row["SM2 Desc Class Cap"] == DBNull.Value)
+                if (row["Security Description 2"] == DBNull.Value)
                 {
-                    row["SM2 Desc Class Cap"] = 0;
+                    row["Security Description 2"] = 0;
                 }
                 if (row["CUSIP"] != DBNull.Value && (string)row["CUSIP"] == "BGH4MRAT0")
                 {
@@ -187,16 +187,16 @@ namespace DataLoaderOptions
             sqlBulkCopy.ColumnMappings.Add("Source", "Source");
             sqlBulkCopy.ColumnMappings.Add("UserId", "UserID");
             sqlBulkCopy.ColumnMappings.Add("As of Date", "As of Date");
-            sqlBulkCopy.ColumnMappings.Add("As of Market Price", "As of Market Price");
+            //sqlBulkCopy.ColumnMappings.Add("As of Market Price", "As of Market Price");
             sqlBulkCopy.ColumnMappings.Add("Portfolio Short Name", "Portfolio Short Name");
             sqlBulkCopy.ColumnMappings.Add("CUSIP", "CUSIP");
-            sqlBulkCopy.ColumnMappings.Add("Issue Date Of Sec", "Issue Date Of Sec");
+            //sqlBulkCopy.ColumnMappings.Add("Issue Date Of Sec", "Issue Date Of Sec");
             sqlBulkCopy.ColumnMappings.Add("Issue Date Of Sec CDF", "Issue Date Of Sec CDF"); // new
             sqlBulkCopy.ColumnMappings.Add("Notice Date Of Sec CDF", "Notice Date Of Sec CDF");// new 
-            sqlBulkCopy.ColumnMappings.Add("SM Description", "SM Description");
+            sqlBulkCopy.ColumnMappings.Add("Security Description", "SM Description");
             sqlBulkCopy.ColumnMappings.Add("Counterparty Broker", "Counterparty Broker");
-            sqlBulkCopy.ColumnMappings.Add("SM2 Desc Class Cap", "SM2 Desc Class Cap");
-            sqlBulkCopy.ColumnMappings.Add("PM Bucket", "PM Bucket");
+            sqlBulkCopy.ColumnMappings.Add("Security Description 2", "SM2 Desc Class Cap");
+            sqlBulkCopy.ColumnMappings.Add("Core Path", "PM Bucket");
             sqlBulkCopy.ColumnMappings.Add("Option Strike Price", "Option Strike Price");
             sqlBulkCopy.ColumnMappings.Add("Maturity Date", "Maturity Date");
             sqlBulkCopy.ColumnMappings.Add("BRS Current Face","BRS Current Face");
